@@ -36,8 +36,7 @@ push @palette, "#$_" for ( qw/98D936 DEEBCC 88F2F0 F7E4A8 FFD9E0/,
 	);
 
 
-my @branch_level = qw/ 3 2 2 2 2 2 2 1 1 1 /;
-my $direction_level = [ [0,60,80], [20, 45, 70] , [30, 45, 60], [50], [30, 60], [45, 70], [60], [60], [60] ];
+my $direction_level = [ [0,60,80], [20, 45] , [30, 45], [50], [30, 60], [45, 70], [60], [60], [60] ];
 
 gen_tree(0, 20, 900, 40, 5 );
 
@@ -66,7 +65,7 @@ sub gen_tree {
 			'opacity' => '0.4',
 		}
 	) for 1..$rand_conc;
-	for (0..$branch_level[$level]) {
+	for (0..@{$direction_level->[$level]}) {
 		gen_tree($level+1,
 		$x+($length+rand(1.6*$length))*cos(deg2rad $direction_level->[$level][$_]),
 		$y-($length+rand(1.6*$length))*sin(deg2rad $direction_level->[$level][$_]),
